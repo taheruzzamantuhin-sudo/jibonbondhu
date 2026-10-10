@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JibonBondhu</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--g:#0F7C80;--g2:#0B6468;--bg:#EAF6F8;--card:#fff;--ink:#12303A;--mut:#62808A;--line:#D8E7EA;--in:#2E9E4F;--inb:#E3F4E8;--out:#E04A4A;--outb:#FDEAEA;--org:#F59A23;--tip:#FFF3DC;--gl:#DDEFF1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--g:#3FB4B8;--g2:#0B3A3D;--bg:#0D1B1F;--card:#15272C;--ink:#E3EFF1;--mut:#8CA8AF;--line:#25404A;--inb:#173326;--outb:#3A1D1F;--tip:#3A3020;--gl:#1B3A40}}
+:root[data-theme="dark"]{--g:#3FB4B8;--g2:#0B3A3D;--bg:#0D1B1F;--card:#15272C;--ink:#E3EFF1;--mut:#8CA8AF;--line:#25404A;--inb:#173326;--outb:#3A1D1F;--tip:#3A3020;--gl:#1B3A40}
+html{background:var(--g2);scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 18px/1.55 'Hind Siliguri',system-ui,sans-serif;min-height:100vh}
+header{background:linear-gradient(var(--g),var(--g2));color:#fff;padding:16px 18px 22px;border-radius:0 0 26px 26px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+header h1{margin:0;font-size:26px;line-height:1.2;font-weight:700}
+header p{margin:0;font-size:14px;opacity:.9}
+.wrap{max-width:560px;margin:0 auto;padding:16px 14px 160px}
+.card{background:var(--card);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 1px 0 var(--line)}
+button.card{border:0;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;display:block}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.row2 .card{margin:0}
+.lab{font-size:16px;color:var(--mut)}
+.big{font-size:30px;font-weight:700;line-height:1.3}
+.in{background:var(--inb)}.out{background:var(--outb)}
+.in .big,.pos{color:var(--in)}.out .big,.neg{color:var(--out)}
+.ttl{display:flex;justify-content:space-between;align-items:center;margin:4px 2px 8px;font-weight:700;font-size:20px}
+.ttl button{background:none;border:0;color:var(--g);font:inherit;font-size:16px;font-weight:600;cursor:pointer}
+.bar{height:9px;background:var(--line);border-radius:9px;overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;background:var(--g);border-radius:9px;transition:width .3s}
+.seg{display:flex;gap:6px;background:var(--gl);border-radius:14px;padding:4px;margin-bottom:12px}
+.seg button{flex:1;font:inherit;font-weight:600;font-size:16px;border:0;background:none;color:var(--mut);padding:8px 4px;border-radius:11px;cursor:pointer}
+.seg button.on{background:var(--g);color:#fff}
+.add{display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:12px}
+.add .full{grid-column:1/-1}
+input{font:inherit;padding:11px 13px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);min-width:0;width:100%}
+textarea{font:inherit;padding:11px 13px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);width:100%;margin-top:8px}
+.rd{background:var(--card);border-radius:18px;padding:18px}
+.rd p{margin:0 0 1em;white-space:pre-line;line-height:1.9;overflow-wrap:anywhere}
+input:focus,textarea:focus,button:focus-visible{outline:3px solid var(--org);outline-offset:1px}
+.pb{font:inherit;font-weight:700;border:0;border-radius:12px;padding:11px 18px;background:var(--g);color:#fff;cursor:pointer}
+.pb.wide{width:100%;margin-bottom:12px;padding:13px}
+.ghost{font:inherit;font-size:16px;background:none;border:1.5px solid var(--line);color:var(--mut);border-radius:12px;padding:8px 14px;cursor:pointer;margin:4px 8px 12px 0}
+ul{list-style:none;margin:0;padding:0}
+li{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+li:last-child{border-bottom:0}
+.cb{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--line);background:none;color:#fff;font-weight:700;cursor:pointer;padding:0}
+li.d .cb{background:var(--in);border-color:var(--in)}
+.tx{flex:1;min-width:0;overflow-wrap:anywhere}
+.tx small{display:block;color:var(--mut);font-size:15px}
+li.d .tx b{text-decoration:line-through;color:var(--mut);font-weight:500}
+.del{flex:none;background:none;border:0;color:var(--mut);font-size:22px;cursor:pointer;padding:2px 8px}
+.ic{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:700}
+.amt{font-weight:700;font-size:19px;white-space:nowrap}
+.empty{color:var(--mut);justify-content:center;text-align:center}
+.tip{background:var(--tip);border-radius:16px;padding:14px;display:flex;gap:10px;align-items:center}
+.ring{display:block;margin:6px auto}
+select{font:inherit;padding:11px 13px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);width:100%}
+.fab{position:fixed;right:18px;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-radius:50%;border:0;background:var(--g);color:#fff;font-size:30px;box-shadow:0 6px 16px rgba(0,0,0,.25);cursor:pointer}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));z-index:6}
+nav button{flex:1;font:inherit;font-size:13px;font-weight:600;background:none;border:0;color:var(--mut);padding:5px 0;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center}
+nav button span{font-size:20px;line-height:1.2}
+nav button.on{color:var(--g);background:var(--gl)}
+#splash{position:fixed;inset:0;z-index:99;background:linear-gradient(#fff,#DDF1F4);color:#12303A;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;animation:out .4s 1.7s forwards}
+#splash h2{margin:6px 0 0;font-size:34px;color:#0B5D66}
+#splash p{margin:0}
+#splash .ld{width:150px;height:8px;border-radius:8px;background:#C9E3E7;margin-top:26px;overflow:hidden}
+#splash .ld i{display:block;height:100%;width:0;background:#2E9E4F;animation:fill 1.6s ease-out forwards}
+@keyframes fill{to{width:100%}}
+@keyframes out{to{opacity:0;visibility:hidden}}
+@media(prefers-reduced-motion:reduce){#splash{animation-delay:.3s}#splash .ld i{animation-duration:.3s}}
+</style></head>
+<body>
+<div id="splash"><svg viewBox="0 0 120 100" width="150" aria-hidden="true"><path d="M10 50L60 12l50 38" fill="none" stroke="#0F7C80" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 46v44h76V46" fill="none" stroke="#0F7C80" stroke-width="8" stroke-linejoin="round"/><circle cx="48" cy="58" r="9" fill="#2E9E4F"/><path d="M32 84c0-12 7-18 16-18s16 6 16 18z" fill="#2E9E4F"/><circle cx="74" cy="54" r="9" fill="#1F5FBF"/><path d="M58 84c0-12 7-18 16-18s16 6 16 18z" fill="#1F5FBF"/></svg>
+<h2>JibonBondhu</h2><p>আপনার দৈনন্দিন সহকারী</p><p style="margin-top:14px;font-weight:600">“সহজ জীবন, সুশৃঙ্খল আগামী”</p><div class="ld"><i></i></div></div>
+<header style="display:flex;justify-content:space-between;align-items:center"><div><h1 id="ht"></h1><p id="hs"></p></div><button data-act="go" data-k="prof" aria-label="প্রোফাইল" style="background:rgba(255,255,255,.2);border:0;border-radius:50%;width:42px;height:42px;font-size:20px;cursor:pointer">👤</button></header>
+<div class="wrap" id="view"></div>
+<button class="fab" id="fab" data-act="fab" aria-label="নতুন কাজ যোগ করুন">+</button>
+<nav id="nav"></nav>
+<script>
+const K='jibonbondhu-v1';
+let S={name:'',tasks:[],bazar:[],books:[],tx:[],goals:[],rem:[],debt:[],budget:0,pin:'',theme:'auto'};
+try{const r=JSON.parse(localStorage.getItem(K)||'null');if(r)S=Object.assign(S,r)}catch(e){}
+if(S.exp){S.exp.forEach(x=>S.tx.push({id:x.id,t:x.t,a:x.a,k:'out',d:x.d}));delete S.exp}
+if(S.goal){if(S.goal.t)S.goals.push({id:1,n:S.goal.n,t:S.goal.t,s:S.goal.s});delete S.goal}
+let rb=null,gs=0,mo=0,fs=19,st=0;try{fs=+localStorage.getItem(K+'-fs')||19}catch(e){}
+let tab='home',seg='tasks',rng='recent',kind='out',edit=false,adding=false,wipe=false;
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const DL=()=>S.dig==='bn'?'bn-BD':'bn-BD-u-nu-latn';
+const bn=n=>Math.round(n).toLocaleString(S.dig==='bn'?'bn-BD':'en-IN');
+const cv=h=>S.dig==='bn'?h:h.replace(/[০-৯]/g,d=>'০১২৩৪৫৬৭৮৯'.indexOf(d));
+const tk=n=>'৳ '+bn(n);
+const num=v=>{const n=parseFloat(String(v).replace(/[০-৯]/g,d=>'০১২৩৪৫৬৭৮৯'.indexOf(d)).replace(/,/g,''));return isNaN(n)||n<0?0:n};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $=id=>document.getElementById(id);
+const val=id=>$(id)?$(id).value.trim():'';
+const fd=d=>new Date(d).toLocaleDateString(DL(),{day:'numeric',month:'long'});
+const inR=(d,r)=>{const x=new Date(d),n=new Date();if(r==='pm'){const t=new Date(n.getFullYear(),n.getMonth()+mo,1);return x.getFullYear()==t.getFullYear()&&x.getMonth()==t.getMonth()}if(r==='month')return x.getFullYear()==n.getFullYear()&&x.getMonth()==n.getMonth();if(r==='year')return x.getFullYear()==n.getFullYear();return n-x<=30*864e5};
+const tot=r=>{let i=0,o=0;S.tx.filter(x=>inR(x.d,r)).forEach(x=>x.k==='in'?i+=x.a:o+=x.a);return[i,o]};
+const bar=p=>`<div class="bar"><i style="width:${Math.min(100,p)}%"></i></div>`;
+const LT={
+ tasks:{n:'কাজ',p:'নতুন কাজ লিখুন...',s:'সময় (ঐচ্ছিক)',e:'কোনো কাজ নেই। উপরে লিখে যোগ করুন।',t:'ছোট ছোট কাজ গুছিয়ে রাখুন, দিনটা আরও সহজ হবে।',i:'🏆'},
+ bazar:{n:'বাজার',p:'নতুন পণ্য যোগ করুন...',s:'পরিমাণ (ঐচ্ছিক, যেমন ২ কেজি)',e:'বাজারের তালিকা খালি।',t:'তালিকা গুছিয়ে রাখুন, বাজার করা হবে আরও সহজ!',i:'🧺'},
+ rem:{n:'রিমাইন্ডার',p:'কী মনে করিয়ে দেব...',s:'সময়',e:'কোনো রিমাইন্ডার নেই। কাজ আর সময় লিখে যোগ করুন।',t:'গুরুত্বপূর্ণ কাজ ভুলে যাবেন না, হোম পাতায় আগেভাগে দেখানো হবে।',i:'🔔'},
+ books:{n:'বই',p:'বইয়ের নাম...',s:'লেখক (ঐচ্ছিক)',e:'কোনো বই যোগ করা হয়নি।',t:'প্রতিদিন কয়েক পাতা পড়লেই বই শেষ হয়ে যাবে।',i:'📚'}
+};
+function greet(){const h=new Date().getHours();return h<5?'শুভ রাত্রি':h<12?'শুভ সকাল':h<16?'শুভ দুপুর':h<18?'শুভ বিকেল':h<20?'শুভ সন্ধ্যা':'শুভ রাত্রি'}
+function home(){
+ const[i,o]=tot('month'),G=S.goals,T=S.tasks,done=T.filter(x=>x.d).length;
+ return `<div class="card"><div class="big" style="font-size:20px">${greet()}, ${esc(S.name||'বন্ধু')}!</div><div class="lab">আজকের দিনটা গুছিয়ে শুরু করুন 🌱</div></div>
+ ${dueCard()}
+ ${budgetCard()}
+ ${(()=>{const b=S.tx.reduce((a,x)=>a+(x.k==='in'?x.a:-x.a),0);return `<button class="card" style="background:var(--g);color:#fff" data-act="go" data-k="hisab"><div style="opacity:.9">বর্তমান ব্যালেন্স</div><div class="big">${b<0?'−':''}${tk(Math.abs(b))}</div></button>`})()}
+ <div class="row2"><div class="card in"><div class="lab">মোট আয় (এই মাস)</div><div class="big">${tk(i)}</div></div><div class="card out"><div class="lab">মোট ব্যয় (এই মাস)</div><div class="big">${tk(o)}</div></div></div>
+ <button class="card" data-act="go" data-k="goal"><div class="lab">সঞ্চয়ের লক্ষ্য</div>${G.length?[...G].sort((a,b)=>(a.s>=a.t)-(b.s>=b.t)||b.s/b.t-a.s/a.t).slice(0,2).map(x=>`<div style="margin-top:6px"><b>${esc(x.n||'লক্ষ্য')}</b> <span class="lab">${bn(Math.min(100,Math.round(x.s/x.t*100)))}% · ${tk(x.s)} / ${tk(x.t)}</span>${bar(x.s/x.t*100)}</div>`).join('')+(G.length>2?`<div class="lab" style="margin-top:10px;color:var(--g);font-weight:600">আরও ${bn(G.length-2)}টি লক্ষ্য · সব দেখুন ›</div>`:''):'<b>লক্ষ্য ঠিক করুন</b>'}</button>
+ <div class="ttl"><span>আজকের কাজ (${bn(done)}/${bn(T.length)})</span><button data-act="go" data-k="list" data-s="tasks">সব দেখুন ›</button></div>
+ <div class="card"><ul>${T.length?tsort(T).slice(0,4).map(x=>row('tasks',x,false)).join(''):'<li class="empty">কোনো কাজ নেই। + চেপে যোগ করুন।</li>'}</ul></div>
+ <button class="card" data-act="go" data-k="ai"><b>🤖 বাংলা AI সহকারী</b><div class="lab">স্মার্ট পরামর্শ ও সাহায্য · প্রশ্ন করুন ›</div></button>`;
+}
+function row(l,x,del=true){const od=l==='rem'&&!x.d&&new Date(x.s)<new Date();
+ return `<li class="${x.d?'d':''}"><button class="cb" data-act="tg" data-l="${l}" data-id="${x.id}" aria-label="শেষ চিহ্নিত করুন">${x.d?'✓':''}</button><div class="tx"><b>${x.pr?'⭐ ':''}${esc(x.t)}</b>${x.s||x.rep?`<small${od?' style="color:var(--out)"':''}>${x.s?esc(l==='rem'?fdt(x.s):x.s):''}${od?' · সময় পার হয়েছে':''}${x.rep?' 🔁 '+RP[x.rep]:''}</small>`:''}</div>${l==='books'&&x.r?`<button class="pb" style="padding:6px 12px;font-size:14px" data-act="read" data-id="${x.id}">পড়ুন${x.p?' '+bn(Math.round(x.p*100))+'%':''}</button>`:''}${del&&l==='tasks'?`<button class="del" data-act="pr" data-id="${x.id}" aria-label="গুরুত্বপূর্ণ">${x.pr?'★':'☆'}</button>`:''}${del?`<button class="del" data-act="rm" data-l="${l}" data-id="${x.id}" aria-label="মুছুন">🗑</button>`:''}</li>`}
+function hisab(){
+ const rr=rng==='month'?'pm':rng,[i,o]=tot(rr),e=S.tx.find(x=>x.id==etx),CL=kind==='in'?CI:CE;
+ const R=[['recent','সাম্প্রতিক'],['month','মাসিক'],['year','বার্ষিক']];
+ return `<div class="seg">${R.map(([k,n])=>`<button class="${k===rng?'on':''}" data-act="rng" data-k="${k}">${n}</button>`).join('')}</div>
+ ${rng==='month'?`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><button class="ghost" style="margin:0" data-act="mo" data-d="-1" aria-label="আগের মাস">◀</button><b>${new Date(new Date().getFullYear(),new Date().getMonth()+mo,1).toLocaleDateString(DL(),{month:'long',year:'numeric'})}</b><button class="ghost" ${mo>=0?'disabled style="margin:0;opacity:.4"':'style="margin:0"'} data-act="mo" data-d="1" aria-label="পরের মাস">▶</button></div>`:''}
+ <div class="row2"><div class="card in"><div class="lab">মোট আয়</div><div class="big">${tk(i)}</div></div><div class="card out"><div class="lab">মোট ব্যয়</div><div class="big">${tk(o)}</div></div></div>
+ <div class="card" style="background:var(--g);color:#fff"><div style="opacity:.9">ব্যালেন্স</div><div class="big">${i-o<0?'−':''}${tk(Math.abs(i-o))}</div></div>
+ ${budgetEd()}
+ ${report()}
+ ${catReport(rr)}
+ <button class="card" data-act="go" data-k="debt"><b>🤝 ধার-বাকির খাতা</b><div class="lab">${(()=>{const[g,p]=debtTot();return 'পাবেন '+tk(g)+' · দেবেন '+tk(p)})()} ›</div></button>
+ <div class="ttl"><span>লেনদেন</span></div>
+ <input id="sq" placeholder="🔍 নাম বা খাত দিয়ে খুঁজুন" value="${esc(q)}" style="margin-bottom:10px">
+ <div class="card"><ul id="txl">${txList()}</ul></div>
+ <div class="seg"><button class="${kind==='in'?'on':''}" data-act="kind" data-k="in">আয়</button><button class="${kind==='out'?'on':''}" data-act="kind" data-k="out">ব্যয়</button></div>
+ <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">${CL.map(c=>`<button class="ghost" style="margin:0;${cat===c?'background:var(--g);color:#fff;border-color:var(--g)':''}" data-act="cat" data-c="${c}">${c}</button>`).join('')}</div>
+ <div class="add"><input id="a1" class="full" placeholder="${kind==='in'?'আয়ের উৎস (যেমন বেতন)':'কীসের খরচ (যেমন চাল)'}"><input id="a2" class="full" inputmode="decimal" placeholder="টাকা"></div>
+ <button class="pb wide" data-act="add">${e?'✓ লেনদেন আপডেট করুন':'+ নতুন লেনদেন যোগ করুন'}</button>${e?'<button class="ghost" data-act="etxc">বাতিল</button>':''}`;
+}
+function list(){
+ const T=LT[seg],L=S[seg],done=L.filter(x=>x.d).length,V=seg==='tasks'?tsort(L):L,rp=seg==='tasks'||seg==='rem';
+ return `${tab==='books'||tab==='rem'?'':`<div class="seg">${['tasks','bazar'].map(k=>`<button class="${k===seg?'on':''}" data-act="seg" data-k="${k}">${LT[k].n}</button>`).join('')}</div>`}
+ <div class="add"><input id="a1" placeholder="${T.p}"><button class="pb" data-act="add">যোগ করুন</button><input id="a2" class="full" ${seg==='rem'?'type="datetime-local"':''} placeholder="${T.s}">${rp?`<select id="a3" class="full" aria-label="কতবার"><option value="">একবার</option><option value="daily">🔁 প্রতিদিন</option><option value="weekly">🔁 প্রতি সপ্তাহে</option><option value="monthly">🔁 প্রতি মাসে</option></select>`:''}</div>
+ <div class="card"><div class="lab">${L.length?`${bn(L.length)}টির মধ্যে ${bn(done)}টি শেষ`:''}</div>${L.length?bar(done/L.length*100):''}<ul>${L.length?V.map(x=>row(seg,x)).join(''):`<li class="empty">${T.e}</li>`}</ul></div>
+ ${done?'<button class="ghost" data-act="clr">শেষ হওয়াগুলো মুছুন</button>':''}
+ ${tab==='books'?importCard():''}
+ <div class="tip" style="background:var(--gl)"><span style="font-size:28px">${T.i}</span>${T.t}</div>`;
+}
+function goalv(){
+ let g=S.goals.find(x=>x.id==gs)||S.goals[0]||{n:'',t:0,s:0};gs=g.id||0;
+ const ch=`<div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:10px">${S.goals.map(x=>`<button class="pb" style="white-space:nowrap;${x.id==gs&&!adding?'':'background:var(--gl);color:var(--ink)'}" data-act="gsel" data-id="${x.id}">${esc(x.n||'লক্ষ্য')}</button>`).join('')}<button class="pb" style="white-space:nowrap;${adding?'':'background:var(--gl);color:var(--ink)'}" data-act="gnew">+ নতুন লক্ষ্য</button></div>`;
+ if(adding)g={n:'',t:0,s:0};
+ if(!g.t||edit||adding)return ch+`<div class="card"><b>সঞ্চয়ের লক্ষ্য ঠিক করুন</b><div class="lab">কী জন্য জমাতে চান?</div></div>
+ <div class="add"><input id="a1" class="full" placeholder="লক্ষ্যের নাম (যেমন নতুন মোবাইল কেনা)" value="${esc(g.n)}"><input id="a2" inputmode="decimal" placeholder="কত টাকা লাগবে" value="${g.t||''}"><button class="pb" data-act="setgoal">ঠিক করুন</button></div>`;
+ const p=Math.min(100,Math.round(g.s/g.t*100)),left=Math.max(0,g.t-g.s),mo=Math.ceil(left/100/30);
+ return ch+`<div class="card" style="text-align:center"><b style="font-size:20px">${esc(g.n||'আমার লক্ষ্য')}</b>
+ <svg class="ring" width="150" height="150" viewBox="0 0 120 120" role="img" aria-label="${bn(p)}% সম্পন্ন"><circle cx="60" cy="60" r="52" fill="none" stroke="var(--line)" stroke-width="12"/><circle cx="60" cy="60" r="52" fill="none" stroke="var(--g)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${p*3.267} 327" transform="rotate(-90 60 60)"/><text x="60" y="68" text-anchor="middle" font-size="24" font-weight="700" fill="var(--g)">${bn(p)}%</text></svg>
+ <div class="lab">লক্ষ্য টাকা</div><div class="big">${tk(g.t)}</div><div class="lab" style="margin-top:6px">এখন পর্যন্ত সঞ্চয়</div><div class="big pos">${tk(g.s)}</div></div>
+ <div class="add"><input id="a1" inputmode="decimal" placeholder="কত টাকা জমালেন"><button class="pb" data-act="dep">জমা করুন</button></div>
+ <button class="pb wide" data-act="editgoal">লক্ষ্য আপডেট করুন</button>
+ <button class="ghost" style="color:var(--out)" data-act="gdel">${wipe?'আবার চেপে নিশ্চিত করুন':'এই লক্ষ্য মুছুন'}</button>
+ <div class="ttl"><span>সঞ্চয়ের পরামর্শ</span></div>
+ <div class="tip"><span style="font-size:28px">💡</span>${left?`প্রতিদিন মাত্র ${tk(100)} করে সঞ্চয় করুন, ${bn(mo)} মাসে লক্ষ্যে পৌঁছাবেন!`:'অভিনন্দন! আপনার লক্ষ্য পূরণ হয়েছে।'}</div>`;
+}
+function prof(){
+ const th={auto:'নিজে নিজে (ফোন অনুযায়ী)',light:'দিনের মোড',dark:'রাতের মোড'};
+ return `${bmsg?`<div class="card" style="background:var(--tip)">${esc(bmsg)}</div>`:''}
+ <div class="card"><b>আপনার নাম</b><div class="add" style="margin:8px 0 0"><input id="a1" placeholder="নাম লিখুন" value="${esc(S.name)}"><button class="pb" data-act="name">সেভ</button></div></div>
+ <div class="card"><b>সংখ্যা</b><div class="lab">${S.dig==='bn'?'বাংলা সংখ্যা (১, ২, ৩)':'ইংরেজি সংখ্যা (১, ২, ৩ এর বদলে 1, 2, 3)'}</div><button class="ghost" style="margin-top:8px" data-act="dig">সংখ্যার ধরন বদলান</button></div>
+ <div class="card"><b>থিম</b><div class="lab">${th[S.theme||'auto']}</div><button class="ghost" style="margin-top:8px" data-act="theme">থিম বদলান</button></div>
+ <div class="card"><b>পিন দিয়ে তালা</b>${S.pin?'<div class="lab">পিন চালু আছে। অ্যাপ খুললে পিন চাইবে।</div><button class="ghost" style="margin-top:8px" data-act="pnoff">পিন বন্ধ করুন</button>':'<div class="lab">৪ থেকে ৮ সংখ্যার পিন দিন। এটা হালকা তালা, ফোনের আসল নিরাপত্তার বিকল্প নয়।</div><div class="add" style="margin:8px 0 0"><input id="pp" type="password" inputmode="numeric" maxlength="8" placeholder="নতুন পিন"><button class="pb" data-act="pnset">চালু করুন</button></div>'}</div>
+ <div class="card"><b>ব্যাকআপ</b><div class="lab">সব তথ্য ফাইলে সেভ করে রাখুন। নতুন ফোনে এটা দিয়ে ফিরিয়ে আনা যাবে।</div><button class="pb wide" style="margin:10px 0 0" data-act="bk">ব্যাকআপ নিন</button>${bkTxt?'<textarea readonly rows="4" id="bkt">'+esc(bkTxt)+'</textarea><button class="ghost" style="margin-top:8px" data-act="bkc">লেখা কপি করুন</button>':''}</div>
+ <div class="card"><b>ব্যাকআপ থেকে ফিরিয়ে আনুন</b><div class="lab">এতে বর্তমান সব তথ্য বদলে যাবে।</div><input id="rf" type="file" accept=".json,application/json,text/plain" style="margin-top:8px"><textarea id="rt" rows="3" placeholder="অথবা ব্যাকআপের লেখা এখানে পেস্ট করুন..."></textarea><button class="pb wide" style="margin:10px 0 0" data-act="rs">ফিরিয়ে আনুন</button></div>
+ <div class="card"><div class="lab">সব তথ্য শুধু এই ফোনের ব্রাউজারে সেভ থাকে।</div><button class="ghost" style="margin-top:10px;color:var(--out)" data-act="wipe">${wipe?'আবার চেপে নিশ্চিত করুন':'সব তথ্য মুছুন'}</button></div>`;
+}
+const ck=id=>K+'-c-'+id;
+function importCard(){return `<div class="card"><b>অ্যাপে পড়ার জন্য বই যোগ করুন</b><div class="lab">.txt ফাইল বেছে নিন, অথবা লেখা পেস্ট করুন।</div>
+<input id="bt" style="margin-top:8px" placeholder="বইয়ের নাম"><input id="ba" style="margin-top:8px" placeholder="লেখক (ঐচ্ছিক)"><input id="bf" type="file" accept=".txt,text/plain" style="margin-top:8px">
+<textarea id="bx" rows="4" placeholder="অথবা এখানে বইয়ের লেখা পেস্ট করুন..."></textarea>
+<button class="pb wide" style="margin:10px 0 0" data-act="addbook">পড়ার বই সেভ করুন</button><div class="lab" id="bm"></div></div>`}
+function readerHTML(){const b=S.books.find(x=>x.id==rb);let c='';try{c=localStorage.getItem(ck(rb))||''}catch(e){}
+ return `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><button class="ghost" style="margin:0" data-act="back">← বইয়ের তালিকা</button><span><button class="ghost" style="margin:0 6px 0 0" data-act="fs" data-d="-2" aria-label="লেখা ছোট করুন">অ−</button><button class="ghost" style="margin:0" data-act="fs" data-d="2" aria-label="লেখা বড় করুন">অ+</button></span></div>
+ <article class="rd" style="font-size:${fs}px">${c.split(/\n\s*\n/).map(p=>`<p>${esc(p.trim())}</p>`).join('')}</article>`}
+const prog=()=>{const h=document.documentElement.scrollHeight-innerHeight;return h>0?Math.min(1,scrollY/h):0};
+function saveProg(){const p=prog(),b=S.books.find(x=>x.id==rb);if(b){b.p=p;save()}$('hs').textContent='পড়া হয়েছে '+bn(Math.round(p*100))+'%'}
+function toProg(p){requestAnimationFrame(()=>{scrollTo(0,p*(document.documentElement.scrollHeight-innerHeight));saveProg()})}
+function addBook(){
+ const t=val('bt'),a=val('ba'),f=$('bf').files[0],px=$('bx').value.trim(),m=$('bm');
+ if(!t){$('bt').focus();return}
+ const fin=txt=>{txt=txt.trim();if(!txt){m.textContent='ফাইল বাছাই করুন অথবা লেখা পেস্ট করুন।';return}
+  const id=Date.now();
+  try{localStorage.setItem(ck(id),txt)}catch(e){m.textContent='জায়গা কম, ছোট ফাইল দিন।';return}
+  S.books.unshift({id,t,s:a,d:false,r:1,p:0});save();render()};
+ if(f){const r=new FileReader();r.onload=()=>fin(String(r.result));r.onerror=()=>{m.textContent='ফাইল পড়া যায়নি।'};r.readAsText(f,'UTF-8')}else fin(px);
+}
+addEventListener('scroll',()=>{if(tab!=='read')return;clearTimeout(st);st=setTimeout(saveProg,150)});
+const fdt=s=>new Date(s).toLocaleString(DL(),{day:'numeric',month:'long',hour:'numeric',minute:'2-digit'});
+const dueCard=()=>{const n=Date.now()+864e5,L=S.rem.filter(x=>!x.d&&new Date(x.s)<=n).sort((a,b)=>new Date(a.s)-new Date(b.s));return L.length?`<button class="card" style="background:var(--tip)" data-act="go" data-k="rem"><b>🔔 রিমাইন্ডার</b>${L.slice(0,3).map(x=>`<div>${esc(x.t)} <span class="lab">${fdt(x.s)}</span></div>`).join('')}</button>`:''};
+function report(){
+ const n=new Date(),M=[];for(let k=5;k>=0;k--){const d=new Date(n.getFullYear(),n.getMonth()-k,1);M.push({y:d.getFullYear(),m:d.getMonth(),i:0,o:0})}
+ S.tx.forEach(x=>{const d=new Date(x.d),m=M.find(q=>q.y===d.getFullYear()&&q.m===d.getMonth());if(m){if(x.k==='in')m.i+=x.a;else m.o+=x.a}});
+ const mx=Math.max(1,...M.flatMap(m=>[m.i,m.o])),H=105;
+ const bars=M.map((m,k)=>{const x=k*52+8,hi=m.i/mx*H,ho=m.o/mx*H;return `<rect x="${x}" y="${115-hi}" width="18" height="${hi}" rx="3" style="fill:var(--in)"/><rect x="${x+20}" y="${115-ho}" width="18" height="${ho}" rx="3" style="fill:var(--out)"/><text x="${x+19}" y="134" text-anchor="middle" font-size="13" style="fill:var(--mut)">${new Date(m.y,m.m,1).toLocaleDateString(DL(),{month:'short'})}</text>`}).join('');
+ const c=M[5],ok=c.i>=c.o;
+ return `<div class="card"><b>মাসিক রিপোর্ট</b><div class="lab">শেষ ৬ মাসের আয় ও ব্যয়</div><svg viewBox="0 0 320 140" width="100%" role="img" aria-label="শেষ ৬ মাসের আয় ও ব্যয়ের চার্ট">${bars}</svg><div class="lab"><span class="pos">■ আয়</span> &nbsp; <span class="neg">■ ব্যয়</span></div><div style="margin-top:6px">এই মাসে ${ok?'বেঁচেছে':'বেশি খরচ হয়েছে'}: <b class="${ok?'pos':'neg'}">${tk(Math.abs(c.i-c.o))}</b></div></div>`}
+const LN=()=>{try{return window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.LocalNotifications||null}catch(e){return null}};
+const nid=id=>Number(String(id).slice(-9));
+async function schedRem(x){const ln=LN();if(!ln||!x)return;try{const p=await ln.requestPermissions();if(p.display!=='granted'||new Date(x.s)<=Date.now())return;await ln.schedule({notifications:[{id:nid(x.id),title:'JibonBondhu',body:x.t,schedule:{at:new Date(x.s),allowWhileIdle:true}}]})}catch(e){}}
+async function cancelRem(id){const ln=LN();if(!ln)return;try{await ln.cancel({notifications:[{id:nid(id)}]})}catch(e){}}
+let aiAns='',aiBusy=false;
+const AQ=[['💰 খরচের পরামর্শ','আমার এই মাসের আয়-ব্যয় দেখে খরচ কমানোর ৩টা সহজ পরামর্শ দাও।'],['🧺 বাজারের তালিকা','আমার বাজারের তালিকা দেখে আর কী কী লাগতে পারে তার একটা গোছানো তালিকা বানাও।'],['🐷 সঞ্চয়ের পরিকল্পনা','আমার সঞ্চয়ের লক্ষ্যগুলো পূরণের একটা সহজ মাসিক পরিকল্পনা বানাও।'],['📋 কাজ সাজিয়ে দাও','আমার বাকি কাজগুলো গুরুত্ব অনুযায়ী সাজিয়ে আজকের পরিকল্পনা দাও।']];
+function aiv(){return `<div class="card"><b>বাংলা AI সহকারী</b><div class="lab">আপনার তথ্য দেখে সহজ বাংলায় পরামর্শ দেয়। প্রশ্ন করলে আপনার আয়-ব্যয়, লক্ষ্য আর কাজের সারাংশ AI-কে পাঠানো হয়।</div></div>
+ <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">${AQ.map(([n,q])=>`<button class="ghost" style="margin:0" data-act="askq" data-q="${esc(q)}">${n}</button>`).join('')}</div>
+ <div class="add"><input id="a1" placeholder="আপনার প্রশ্ন লিখুন..."><button class="pb" data-act="ask">পাঠান</button></div>
+ <div class="card" id="aia" style="white-space:pre-wrap;overflow-wrap:anywhere">${aiBusy&&!aiAns?'ভাবছি...':aiAns?esc(aiAns):'<span class="lab">এখানে উত্তর আসবে।</span>'}</div>`}
+async function ask(q){
+ if(!q||aiBusy)return;
+ let sm=null;try{sm=window.claude?await claude.use('sample'):null}catch(e){}
+ if(!sm){aiAns='AI সহকারী এখানে চালু নেই। এটা শুধু claude.ai-তে অ্যাপের লিংক খুললে কাজ করে।';render();return}
+ const[i,o]=tot('month');
+ const ctx=`এই মাসের আয়: ${i} টাকা, ব্যয়: ${o} টাকা। সঞ্চয়ের লক্ষ্য: ${S.goals.map(g=>`${g.n} (${g.s}/${g.t} টাকা)`).join(', ')||'নেই'}। বাকি কাজ: ${S.tasks.filter(x=>!x.d).map(x=>x.t).join(', ')||'নেই'}। বাজারের তালিকা: ${S.bazar.filter(x=>!x.d).map(x=>x.t).join(', ')||'নেই'}।`;
+ aiBusy=true;aiAns='';render();
+ try{const r=await sm(`তুমি "জীবনবন্ধু" অ্যাপের বাংলা সহকারী। সহজ, ছোট ও বাস্তব উত্তর সাধারণ বাংলায় দাও (সর্বোচ্চ ১৫০ শব্দ)। আর্থিক ক্ষেত্রে নিশ্চিত প্রতিশ্রুতি দেবে না। ব্যবহারকারীর তথ্য: ${ctx}\n\nপ্রশ্ন: ${q}`,{onText:({text})=>{aiAns=text;const e=$('aia');if(e)e.textContent=text}});aiAns=r.text}catch(e){aiAns=e&&e.code==='rate_limited'?'একটু পরে আবার চেষ্টা করুন।':'উত্তর আনা যায়নি। আবার চেষ্টা করুন।'}
+ aiBusy=false;render();
+}
+setInterval(()=>{const n=Date.now();let ch=0;S.rem.forEach(x=>{if(!x.d&&!x.n&&new Date(x.s)<=n){x.n=1;ch=1;try{if(window.Notification&&Notification.permission==='granted')new Notification('JibonBondhu',{body:x.t})}catch(e){}}});if(ch)save();if(tab==='home')render()},30000);
+const hp=t=>{let h=5381;for(const c of String(t))h=((h<<5)+h+c.charCodeAt(0))|0;return String(h)};
+const en=t=>String(t).replace(/[০-৯]/g,d=>'০১২৩৪৫৬৭৮৯'.indexOf(d));
+let locked=!!S.pin,lm='',etx=0,cat='',q='',dk='get',bkTxt='',bmsg='';
+const RP={daily:'প্রতিদিন',weekly:'প্রতি সপ্তাহে',monthly:'প্রতি মাসে'};
+const CE=['খাবার','যাতায়াত','বিল','বাজার','স্বাস্থ্য','অন্যান্য'],CI=['বেতন','ব্যবসা','অন্যান্য'];
+const tsort=L=>[...L].sort((a,b)=>(b.pr?1:0)-(a.pr?1:0));
+const lts=d=>{const p=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'T'+p(d.getHours())+':'+p(d.getMinutes())};
+function nextDt(s,r){const d=new Date(s),n=Date.now();do{if(r==='daily')d.setDate(d.getDate()+1);else if(r==='weekly')d.setDate(d.getDate()+7);else d.setMonth(d.getMonth()+1)}while(d<=n);return lts(d)}
+function resetRep(){let c=0;const n=new Date();S.tasks.forEach(x=>{if(x.rep&&x.d&&x.dt){const t=new Date(x.dt);if(x.rep==='daily'?t.toDateString()!==n.toDateString():x.rep==='weekly'?n-t>=7*864e5:(t.getMonth()!==n.getMonth()||t.getFullYear()!==n.getFullYear())){x.d=false;c=1}}});if(c)save()}
+const curTx=()=>{const rr=rng==='month'?'pm':rng,k=q.trim().toLowerCase();return S.tx.filter(x=>inR(x.d,rr)&&(!k||(x.t+' '+(x.c||'')).toLowerCase().includes(k))).sort((a,b)=>b.id-a.id)};
+function txList(){const L=curTx();return L.length?L.map(x=>`<li><span class="ic ${x.k==='in'?'in pos':'out neg'}">${x.k==='in'?'↑':'↓'}</span><div class="tx"><b>${esc(x.t)}</b><small>${x.c?esc(x.c)+' · ':''}${fd(x.d)}</small></div><span class="amt ${x.k==='in'?'pos':'neg'}">${x.k==='in'?'+':'−'} ${tk(x.a)}</span><button class="del" data-act="etx" data-id="${x.id}" aria-label="বদলান">✎</button><button class="del" data-act="rm" data-l="tx" data-id="${x.id}" aria-label="মুছুন">🗑</button></li>`).join(''):`<li class="empty">${q?'কিছু পাওয়া যায়নি।':'এই সময়ে কোনো লেনদেন নেই।'}</li>`}
+function catReport(rr){const m={};S.tx.filter(x=>x.k==='out'&&inR(x.d,rr)).forEach(x=>{const c=x.c||'অন্যান্য';m[c]=(m[c]||0)+x.a});const E=Object.entries(m).sort((a,b)=>b[1]-a[1]);if(!E.length)return'';const mx=E[0][1];return `<div class="card"><b>খাত অনুযায়ী ব্যয়</b>${E.map(([c,a])=>`<div style="margin-top:8px"><div style="display:flex;justify-content:space-between"><span>${esc(c)}</span><b>${tk(a)}</b></div><div class="bar" style="margin:4px 0"><i style="width:${a/mx*100}%;background:var(--out)"></i></div></div>`).join('')}</div>`}
+const spent=()=>tot('month')[1];
+function budgetCard(){const b=S.budget;if(!b)return'';const t=spent(),p=t/b*100;if(p<80)return'';return `<button class="card" style="background:${p>=100?'var(--outb)':'var(--tip)'}" data-act="go" data-k="hisab"><b>${p>=100?'⚠️ বাজেট পার হয়েছে':'⚠️ বাজেটের কাছাকাছি'}</b><div class="lab">এই মাসে ${tk(t)} খরচ, বাজেট ${tk(b)}</div></button>`}
+function budgetEd(){const b=S.budget,t=spent(),p=b?t/b*100:0;return `<div class="card"><b>মাসিক বাজেট</b>${b?`<div class="lab">এই মাসে ${tk(t)} / ${tk(b)} খরচ হয়েছে</div><div class="bar"><i style="width:${Math.min(100,p)}%;background:${p>=100?'var(--out)':p>=80?'var(--org)':'var(--g)'}"></i></div>`:'<div class="lab">একটা সীমা ঠিক করুন, কাছাকাছি গেলে সতর্ক করবে।</div>'}<div class="add" style="margin:10px 0 0"><input id="bg" inputmode="decimal" placeholder="${b?'নতুন বাজেট (০ দিলে বন্ধ)':'মাসে কত টাকা খরচ করতে চান'}"><button class="pb" data-act="budget">ঠিক করুন</button></div></div>`}
+const debtTot=()=>{let g=0,p=0;S.debt.filter(x=>!x.d).forEach(x=>x.k==='get'?g+=x.a:p+=x.a);return[g,p]};
+function debtv(){const[g,p]=debtTot();return `<div class="row2"><div class="card in"><div class="lab">আপনি পাবেন</div><div class="big">${tk(g)}</div></div><div class="card out"><div class="lab">আপনি দেবেন</div><div class="big">${tk(p)}</div></div></div>
+ <div class="seg"><button class="${dk==='get'?'on':''}" data-act="dk" data-k="get">পাব</button><button class="${dk==='give'?'on':''}" data-act="dk" data-k="give">দেব</button></div>
+ <div class="add"><input id="a1" class="full" placeholder="কার সাথে (নাম)"><input id="a2" inputmode="decimal" placeholder="টাকা"><button class="pb" data-act="dadd">যোগ করুন</button></div>
+ <div class="card"><ul>${S.debt.length?S.debt.map(x=>`<li class="${x.d?'d':''}"><button class="cb" data-act="dtg" data-id="${x.id}" aria-label="মেটানো হয়েছে">${x.d?'✓':''}</button><div class="tx"><b>${esc(x.n)}</b><small>${x.k==='get'?'পাবেন':'দেবেন'} · ${fd(x.id)}</small></div><span class="amt ${x.k==='get'?'pos':'neg'}">${tk(x.a)}</span><button class="del" data-act="drm" data-id="${x.id}" aria-label="মুছুন">🗑</button></li>`).join(''):'<li class="empty">কোনো ধার-বাকি নেই।</li>'}</ul></div><div class="lab">টিক দিলে মেটানো হয়েছে ধরা হবে।</div>`}
+function backupData(){const bc={};S.books.forEach(b=>{if(b.r){try{bc[b.id]=localStorage.getItem(ck(b.id))||''}catch(e){}}});return JSON.stringify({app:'jibonbondhu',v:2,at:new Date().toISOString(),data:S,books:bc})}
+async function doRestore(){
+ const f=$('rf')&&$('rf').files[0];let t=$('rt')?$('rt').value.trim():'';
+ if(f)t=await new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(String(fr.result));fr.onerror=()=>r('');fr.readAsText(f,'UTF-8')});
+ let o=null;try{o=JSON.parse(t)}catch(e){}
+ if(!o||o.app!=='jibonbondhu'||!o.data){bmsg='ব্যাকআপ বোঝা যায়নি। ঠিক ফাইল বা লেখা দিন।';render();return}
+ S=Object.assign({name:'',tasks:[],bazar:[],books:[],tx:[],goals:[],rem:[],debt:[],budget:0,pin:'',theme:'auto'},o.data);
+ Object.keys(o.books||{}).forEach(id=>{try{localStorage.setItem(ck(id),o.books[id])}catch(e){}});
+ S.rem.forEach(x=>{if(!x.d)schedRem(x)});save();bmsg='সব তথ্য ফিরে এসেছে।';render();
+}
+function act2(b){
+ const a=b.dataset.act,id=b.dataset.id,l=b.dataset.l;
+ const keep=f=>{const v1=val('a1'),v2=val('a2');f();render();if($('a1'))$('a1').value=v1;if($('a2'))$('a2').value=v2};
+ const done=()=>{save();render();return true};
+ if(a==='unlock'){if(hp(en(val('a1')))===S.pin){locked=false;lm=''}else lm='ভুল পিন। আবার চেষ্টা করুন।';render();return true}
+ if(a==='go'){etx=0;cat='';q='';bmsg='';return false}
+ if(a==='add'&&tab==='hisab'){
+  const t=val('a1'),n=num(val('a2'));if(!t){$('a1').focus();return true}if(!n){$('a2').focus();return true}
+  if(etx){const x=S.tx.find(i=>i.id==etx);if(x){x.t=t;x.a=n;x.k=kind;x.c=cat}etx=0}else S.tx.push({id:Date.now(),t,a:n,k:kind,c:cat,d:new Date().toISOString()});
+  cat='';return done()}
+ if(a==='add'&&(tab==='list'||tab==='rem')&&(seg==='tasks'||seg==='rem')){
+  const t=val('a1');if(!t){$('a1').focus();return true}
+  if(seg==='rem'&&!val('a2')){$('a2').focus();return true}
+  const x={id:Date.now(),t,s:val('a2'),d:false,rep:$('a3')?$('a3').value:''};S[seg].unshift(x);
+  if(seg==='rem'){schedRem(x);try{if(window.Notification&&Notification.permission==='default')Notification.requestPermission()}catch(e){}}
+  save();render();if($('a1'))$('a1').focus();return true}
+ if(a==='tg'){const x=(S[l]||[]).find(i=>i.id==id);if(x&&x.rep){if(l==='rem'){x.s=nextDt(x.s,x.rep);x.n=0;cancelRem(x.id);schedRem(x)}else{x.d=!x.d;x.dt=Date.now()}return done()}return false}
+ if(a==='pr'){const x=S.tasks.find(i=>i.id==id);if(x)x.pr=!x.pr;return done()}
+ if(a==='kind'){keep(()=>{kind=b.dataset.k;cat=''});return true}
+ if(a==='cat'){keep(()=>{cat=cat===b.dataset.c?'':b.dataset.c});return true}
+ if(a==='etx'){const x=S.tx.find(i=>i.id==id);if(!x)return true;etx=x.id;kind=x.k;cat=x.c||'';render();$('a1').value=x.t;$('a2').value=x.a;$('a1').scrollIntoView({block:'center'});$('a1').focus();return true}
+ if(a==='etxc'){etx=0;cat='';render();return true}
+ if(a==='budget'){S.budget=num(val('bg'));return done()}
+ if(a==='dk'){keep(()=>{dk=b.dataset.k});return true}
+ if(a==='dadd'){const n=val('a1'),m=num(val('a2'));if(!n){$('a1').focus();return true}if(!m){$('a2').focus();return true}S.debt.unshift({id:Date.now(),n,a:m,k:dk,d:false});save();render();$('a1').focus();return true}
+ if(a==='dtg'){const x=S.debt.find(i=>i.id==id);if(x)x.d=!x.d;return done()}
+ if(a==='drm'){S.debt=S.debt.filter(i=>i.id!=id);return done()}
+ if(a==='dig'){S.dig=S.dig==='bn'?'en':'bn';return done()}
+ if(a==='theme'){S.theme=S.theme==='auto'?'light':S.theme==='light'?'dark':'auto';return done()}
+ if(a==='pnset'){const p=en(val('pp'));if(!/^\d{4,8}$/.test(p)){bmsg='৪ থেকে ৮ সংখ্যার পিন দিন।';render();return true}S.pin=hp(p);bmsg='পিন চালু হয়েছে। পিন ভুলে গেলে ব্যাকআপ থেকে তথ্য ফেরানো যাবে না, তাই মনে রাখুন।';return done()}
+ if(a==='pnoff'){S.pin='';bmsg='পিন বন্ধ করা হয়েছে।';return done()}
+ if(a==='bk'){bkTxt=backupData();bmsg='ব্যাকআপ তৈরি হয়েছে। ফাইল না নামলে নিচের লেখা কপি করে কোথাও রেখে দিন।';render();
+  (async()=>{try{const dl=window.claude?await claude.use('downloads'):null;if(dl)await dl.save({filename:'jibonbondhu-backup.json',data:bkTxt});else{const u=URL.createObjectURL(new Blob([bkTxt],{type:'application/json'})),el=document.createElement('a');el.href=u;el.download='jibonbondhu-backup.json';document.body.appendChild(el);el.click();el.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}}catch(e){}})();return true}
+ if(a==='bkc'){const t=$('bkt');try{navigator.clipboard.writeText(bkTxt).then(()=>{bmsg='কপি হয়েছে।';render()},()=>{if(t)t.select()})}catch(e){if(t)t.select()}return true}
+ if(a==='rs'){doRestore();return true}
+ return false}
+document.addEventListener('input',e=>{if(e.target.id==='sq'){q=e.target.value;const L=$('txl');if(L)L.innerHTML=cv(txList())}});
+const NAV=[['home','হোম','🏠'],['hisab','হিসাব','💰'],['list','তালিকা','📋'],['rem','রিমাইন্ডার','🔔'],['goal','সঞ্চয়','🐷'],['books','বই','📚']];
+const TT={hisab:'আয়-ব্যয়ের হিসাব',list:'তালিকা',goal:'সঞ্চয়ের লক্ষ্য',books:'বইয়ের তালিকা',rem:'রিমাইন্ডার',ai:'বাংলা AI সহকারী',debt:'ধার-বাকির খাতা',prof:'প্রোফাইল'};
+function render(){resetRep();document.documentElement.dataset.theme=S.theme==='auto'?'':S.theme;
+ if(locked){$('ht').textContent='JibonBondhu';$('hs').textContent='অ্যাপ লক করা আছে';$('view').innerHTML=`<div class="card"><b>পিন দিন</b><input id="a1" type="password" inputmode="numeric" maxlength="8" placeholder="পিন" style="margin:10px 0"><button class="pb wide" data-act="unlock">খুলুন</button><div class="lab">${lm}</div></div>`;$('nav').innerHTML='';$('fab').hidden=true;return}
+ $('ht').textContent=tab==='home'?'JibonBondhu':tab==='read'?((S.books.find(x=>x.id==rb)||{}).t||''):TT[tab];
+ $('hs').textContent=tab==='read'?'পড়া হয়েছে '+bn(Math.round(((S.books.find(x=>x.id==rb)||{}).p||0)*100))+'%':tab==='home'?'আপনার দৈনন্দিন সহকারী':new Date().toLocaleDateString(DL(),{weekday:'long',day:'numeric',month:'long'});
+ $('view').innerHTML=cv({home,hisab,list,goal:goalv,books:()=>{seg='books';return list()},rem:()=>{seg='rem';return list()},read:readerHTML,ai:aiv,debt:debtv,prof}[tab]());
+ $('fab').hidden=tab!=='home';
+ $('nav').innerHTML=NAV.map(([k,n,i])=>`<button data-act="go" data-k="${k}" class="${k===(tab==='read'?'books':tab==='ai'?'home':tab==='debt'?'hisab':tab)?'on':''}"><span>${i}</span>${n}</button>`).join('');
+}
+function act(b){
+ const a=b.dataset.act,id=b.dataset.id,l=b.dataset.l;
+ if(a!=='wipe'&&a!=='gdel')wipe=false;
+ if(a==='go'){tab=b.dataset.k;edit=false;adding=false;if(b.dataset.s)seg=b.dataset.s;else if(tab==='list'&&(seg==='books'||seg==='rem'))seg='tasks'}
+ else if(a==='ask'){ask(val('a1'));return}
+ else if(a==='askq'){ask(b.dataset.q);return}
+ else if(a==='addbook'){addBook();return}
+ else if(a==='read'){rb=+id;tab='read';render();toProg((S.books.find(x=>x.id==rb)||{}).p||0);return}
+ else if(a==='back'){saveProg();tab='books';rb=null;render();scrollTo(0,0);return}
+ else if(a==='fs'){const p=prog();fs=Math.min(32,Math.max(14,fs+(+b.dataset.d)));try{localStorage.setItem(K+'-fs',fs)}catch(e){}render();toProg(p);return}
+ else if(a==='seg')seg=b.dataset.k;
+ else if(a==='rng'){rng=b.dataset.k;mo=0}
+ else if(a==='mo'){mo=Math.min(0,mo+(+b.dataset.d))}
+ else if(a==='kind')kind=b.dataset.k;
+ else if(a==='fab'){tab='list';seg='tasks';render();$('a1').focus();return}
+ else if(a==='add'){
+  const t=val('a1');if(!t){$('a1').focus();return}
+  if(tab==='hisab'){const n=num(val('a2'));if(!n){$('a2').focus();return}S.tx.push({id:Date.now(),t,a:n,k:kind,d:new Date().toISOString()})}
+  else{if(seg==='rem'&&!val('a2')){$('a2').focus();return}S[seg].unshift({id:Date.now(),t,s:val('a2'),d:false});if(seg==='rem')schedRem(S.rem[0]);if(seg==='rem')try{if(window.Notification&&Notification.permission==='default')Notification.requestPermission()}catch(e){}}
+ }
+ else if(a==='tg'){const x=S[l].find(i=>i.id==id);x.d=!x.d;if(l==='rem'){if(x.d)cancelRem(x.id);else schedRem(x)}}
+ else if(a==='rm'){S[l]=S[l].filter(i=>i.id!=id);if(l==='rem')cancelRem(id);if(l==='books')try{localStorage.removeItem(ck(id))}catch(e){}}
+ else if(a==='clr')S[seg]=S[seg].filter(x=>!x.d);
+ else if(a==='setgoal'){const t=num(val('a2'));if(!t){$('a2').focus();return}if(adding||!S.goals.length){const id=Date.now();S.goals.push({id,n:val('a1'),t,s:0});gs=id}else{const x=S.goals.find(i=>i.id==gs);x.n=val('a1');x.t=t}edit=false;adding=false}
+ else if(a==='dep'){const n=num(val('a1'));if(!n){$('a1').focus();return}const x=S.goals.find(i=>i.id==gs);if(x)x.s+=n}
+ else if(a==='editgoal')edit=true;
+ else if(a==='gsel'){gs=+id;adding=false;edit=false}
+ else if(a==='gnew'){adding=true;edit=false}
+ else if(a==='gdel'){if(wipe){S.goals=S.goals.filter(x=>x.id!=gs);gs=0;wipe=false}else{wipe=true;render();return}}
+ else if(a==='name')S.name=val('a1');
+ else if(a==='wipe'){if(wipe){S={name:'',tasks:[],bazar:[],books:[],tx:[],goals:[],rem:[],debt:[],budget:0,pin:'',theme:'auto'};wipe=false}else{wipe=true;render();return}}
+ save();render();
+ if($('a1')&&(a==='add'||a==='dep'))$('a1').focus();
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(b&&!act2(b))act(b)});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName==='INPUT'&&/^a\d$/.test(e.target.id)){const p=document.querySelector('#view .pb');if(p&&!act2(p))act(p)}});
+render();
+</script></body></html>
